@@ -1,0 +1,15 @@
+{
+    "name": "com.ubuntu.developer.kevinfeyder.tipster",
+    "description": "a clean tip calculator",
+    "framework": "ubuntu-sdk-14.10-qml-dev3",
+    "architecture": "all",
+    "title": "tipster",
+    "hooks": {
+        "tip": {
+            "apparmor": "tip.json",
+            "desktop": "tip.desktop"
+        }
+    },
+    "version": "0.5",
+    "maintainer": "Kevin Feyder <kevinfeyder@gmail.com>"
+}
