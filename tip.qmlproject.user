@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.1.1, 2014-10-17T22:53:02. -->
+<!-- Written by QtCreator 3.1.1, 2015-02-20T09:51:03. -->
 <qtcreator>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
-  <value type="int">1</value>
+  <value type="int">0</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.EditorSettings</variable>
@@ -194,11 +194,13 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">UbuntuProjectManager.UploadStep</value>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedFiles">
-       <value type="QString">/home/kevin/Documents/Development/ubuntu/build-tip-Ubuntu_Device_GCC_armhf_ubuntu_sdk_14_10_utopic-default/com.ubuntu.developer.kevinfeyder.tipster_0.4.1_all.click</value>
-       <value type="QString">/usr/share/qtcreator/ubuntu/scripts/qtc_device_applaunch.py</value>
        <value type="QString">/home/kevin/Documents/Development/ubuntu/build-tip-Ubuntu_Device_GCC_armhf_ubuntu_sdk_14_10_utopic-default/com.ubuntu.developer.kevinfeyder.tipster_0.5_all.click</value>
+       <value type="QString">/home/kevin/Documents/Development/ubuntu/build-tip-Ubuntu_Device_GCC_armhf_ubuntu_sdk_14_10_utopic-default/com.ubuntu.developer.kevinfeyder.tipster_0.4.1_all.click</value>
+       <value type="QString">/home/kevin/Documents/Development/ubuntu/build-tip-Ubuntu_Device_GCC_armhf_ubuntu_sdk_14_10_utopic-default/com.ubuntu.developer.kevinfeyder.tipster_0.6_all.click</value>
+       <value type="QString">/usr/share/qtcreator/ubuntu/scripts/qtc_device_applaunch.py</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedHosts">
+       <value type="QString">127.0.0.1</value>
        <value type="QString">127.0.0.1</value>
        <value type="QString">127.0.0.1</value>
        <value type="QString">127.0.0.1</value>
@@ -207,16 +209,19 @@
        <value type="QString">/tmp</value>
        <value type="QString">/tmp</value>
        <value type="QString">/tmp</value>
+       <value type="QString">/tmp</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedSysroots">
        <value type="QString">/var/lib/schroot/chroots/click-ubuntu-sdk-14.10-armhf</value>
        <value type="QString">/var/lib/schroot/chroots/click-ubuntu-sdk-14.10-armhf</value>
        <value type="QString">/var/lib/schroot/chroots/click-ubuntu-sdk-14.10-armhf</value>
+       <value type="QString">/var/lib/schroot/chroots/click-ubuntu-sdk-14.10-armhf</value>
       </valuelist>
       <valuelist type="QVariantList" key="Qt4ProjectManager.MaemoRunConfiguration.LastDeployedTimes">
+       <value type="QDateTime">2015-02-19T22:42:10</value>
        <value type="QDateTime">2014-10-17T22:11:08</value>
-       <value type="QDateTime">2014-10-17T22:41:11</value>
-       <value type="QDateTime">2014-10-17T22:41:11</value>
+       <value type="QDateTime">2015-02-19T22:46:06</value>
+       <value type="QDateTime">2015-02-19T22:46:06</value>
       </valuelist>
      </valuemap>
      <value type="int" key="ProjectExplorer.BuildStepList.StepsCount">2</value>

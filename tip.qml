@@ -47,17 +47,11 @@ MainView {
         id:page0
         width: units.gu(100)
         title: i18n.tr("tipster")
-        tools: ToolbarItems {
-            // define the action:
-            ToolbarButton {
-                action: Action {
-                    text: "User Settings"
-                    iconSource: Qt.resolvedUrl("settings.svg")
-                    iconName: "settings"
-                    onTriggered: PopupUtils.open((setting))
-                }
-
-            }}
+        head.actions: Action {
+            id:settingCog
+            iconName: "settings"
+            onTriggered: PopupUtils.open((setting));
+        }
 
         Column {
             id: column1
@@ -67,19 +61,47 @@ MainView {
                 fill: parent
             }
 
+
+                    UbuntuShape {
+                        id: uPic
+                        clip:true
+                        height: units.gu(15)
+                        width:height
+                        radius: "medium"
+                        image: Image {
+                            id: pic
+                            width:uPic.width
+                            source:"avatarpic.jpg"
+                            height: width
+                        }
+                    }
             Item {
                 id:firstInput
                 height:units.gu(10)
                 width:parent.width
                 //showDivider: false
-                Label {
-                    id:billText
-                    text: "Bill Amount"
-                    anchors.horizontalCenter: parent.horizontalCenter;
+                Item{
+                    id:billContainer
+                    width:parent.width
+                    height:billText.height
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    Label {
+                        id:billText
+                        text: billInput.focus === true ? "Dismiss Keyboard":"Bill Amount";
+                        fontSize: billInput.focus === true ? "large":"medium";
+                        anchors.horizontalCenter: parent.horizontalCenter;
+                    }
+                    MouseArea{
+                        anchors.fill: parent;
+                        onClicked: {
+                            billInput.focus === true ? Qt.inputMethod.hide(): Qt.inputMethod.hide();
+                            billInput.focus = false;
+                        }
+                    }
                 }
                 TextField {
                     id:billInput
-                    anchors{top: billText.bottom; topMargin:units.gu(2);horizontalCenter: parent.horizontalCenter}
+                    anchors{top: billContainer.bottom; topMargin:units.gu(2);horizontalCenter: parent.horizontalCenter}
                     inputMethodHints: Qt.ImhDigitsOnly
                     width:parent.width
                     color:"#29b866"
@@ -87,6 +109,7 @@ MainView {
                     text: ""
                     onTextChanged: stuff.text = billInput.text
                 }
+                //onClicked:Qt.inputMethod.hide();
             }
             Item{
                 id:tip
@@ -95,7 +118,7 @@ MainView {
                 //showDivider: false
                 Label {
                     id:tipText
-                    text: "Tip percentage"
+                    text: "Tip Percentage"
                     anchors.horizontalCenter: parent.horizontalCenter;
                 }
                 UbuntuShape {
@@ -111,6 +134,7 @@ MainView {
                         anchors.centerIn: tipInput
                         anchors.verticalCenter: parent.verticalCenter
                         spacing: parent.width / 8
+
                     Image {source:"subtract.svg"
                            height: parent.height /1.3
                            width: height
@@ -119,7 +143,7 @@ MainView {
                                 height:tipInput.height
                                 width: tipInput.width /3.5
                                 anchors {verticalCenter: parent.verticalCenter; horizontalCenter: parent.horizontalCenter}
-                                onClicked: if(stuff.tip === 0){/*do nothing*/}else {stuff.tip = stuff.tip - 1}
+                                onClicked: if(stuff.tip === 0){}else {stuff.tip = stuff.tip - 1}
                             }
                     }
 
@@ -131,6 +155,7 @@ MainView {
                     }
 
                     Label{
+                        id:percentLabel
                         text: stuff.tip + "%"
                         color:"white";
                         MouseArea {
@@ -168,7 +193,7 @@ MainView {
                 //showDivider: false
                 Label {
                     id:peopleText
-                    text: "Number of people"
+                    text: "Number Of People"
                     anchors.horizontalCenter: parent.horizontalCenter;
                 }
                 UbuntuShape {

@@ -14,7 +14,7 @@ Component {
 
             TextField {
                 id:normalInput
-                placeholderText: tipUp.contents.up
+                placeholderText: tipUp.contents.up + "%"
                 text: ""
                 onTextChanged: tipUp.contents = {up: normalInput.text}
                 inputMethodHints: Qt.ImhDigitsOnly
