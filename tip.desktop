@@ -5,3 +5,7 @@ Icon=tipster-app.png
 Terminal=false
 Type=Application
 X-Ubuntu-Touch=true
+X-Ubuntu-Splash-Image=splash.png
+X-Ubuntu-Splash-Color=#C29979
+X-Ubuntu-Splash-Color-Header=#d0a889
+X-Ubuntu-Splash-Color-Footer=#b48b69
