@@ -1,7 +1,6 @@
-import QtQuick 2.0
-import Ubuntu.Components 1.1
+import QtQuick 2.4
+import Ubuntu.Components 1.2
 import Ubuntu.Components.Popups 1.0
-import Ubuntu.Components.ListItems 0.1 as ListItem
 import U1db 1.0 as U1db
 import "components"
 
@@ -10,24 +9,24 @@ MainView {
     // objectName for functional testing purposes (autopilot-qt5)
     objectName: "mainView"
     applicationName: "com.ubuntu.developer.kevinfeyder.tipster"
-    width: units.gu(40)
+    width: units.gu(45)
     height: units.gu(75)
     backgroundColor: "#f1f1f1"//"#2ECC71"
-    useDeprecatedToolbar: false
+
 
     U1db.Database {
-      id: db
-      path: "tipster.u1db"
+        id: db
+        path: "tipster.u1db"
     }
 
     U1db.Document {//replaces stuff.tip
-      id: tipUp
-      database: db
-      docId: "save_up"
-      create: true
-      defaults: { "up": 15 }
-      Component.onCompleted: { tipUp.contents.up }
-                    }
+        id: tipUp
+        database: db
+        docId: "save_up"
+        create: true
+        defaults: { "up": 15 }
+        Component.onCompleted: { tipUp.contents.up }
+    }
 
     Item {
         id:stuff
@@ -38,14 +37,16 @@ MainView {
     }
     Item {
         id:auto
-        function startup()
-        {stuff.tip = tipUp.contents.up}
+        function startup(){
+            stuff.tip = tipUp.contents.up;
+            column1.opacity = 1;
+        }
         Component.onCompleted: startup()
     }
 
     Page {
         id:page0
-        width: units.gu(100)
+        //width: units.gu(100)
         title: i18n.tr("tipster")
         head.actions: Action {
             id:settingCog
@@ -56,28 +57,19 @@ MainView {
         Column {
             id: column1
             spacing: units.gu(1)
+            opacity:0;
+            width:parent.width-units.gu(4)
             anchors {
-                margins: units.gu(1)
-                fill: parent
+                margins: units.gu(2)
+                centerIn: parent
+
             }
+            Behavior on opacity { NumberAnimation { easing.type: Easing.InOutCirc; duration: 1500} }
 
 
-                    UbuntuShape {
-                        id: uPic
-                        clip:true
-                        height: units.gu(15)
-                        width:height
-                        radius: "medium"
-                        image: Image {
-                            id: pic
-                            width:uPic.width
-                            source:"avatarpic.jpg"
-                            height: width
-                        }
-                    }
             Item {
                 id:firstInput
-                height:units.gu(10)
+                height:units.gu(9)
                 width:parent.width
                 //showDivider: false
                 Item{
@@ -113,7 +105,7 @@ MainView {
             }
             Item{
                 id:tip
-                height:units.gu(11)
+                height:units.gu(10)
                 width:parent.width
                 //showDivider: false
                 Label {
@@ -135,52 +127,52 @@ MainView {
                         anchors.verticalCenter: parent.verticalCenter
                         spacing: parent.width / 8
 
-                    Image {source:"subtract.svg"
-                           height: parent.height /1.3
-                           width: height
-                           anchors.verticalCenter: parent.verticalCenter
-                           MouseArea {
+                        Image {source:"subtract.svg"
+                            height: parent.height /1.3
+                            width: height
+                            anchors.verticalCenter: parent.verticalCenter
+                            MouseArea {
                                 height:tipInput.height
                                 width: tipInput.width /3.5
                                 anchors {verticalCenter: parent.verticalCenter; horizontalCenter: parent.horizontalCenter}
                                 onClicked: if(stuff.tip === 0){}else {stuff.tip = stuff.tip - 1}
                             }
-                    }
+                        }
 
-                    Label
-                    {
-                        text:" | ";
-                        color:"white"
-                        font.weight: Font.Light;
-                    }
+                        Label
+                        {
+                            text:" | ";
+                            color:"white"
+                            font.weight: Font.Light;
+                        }
 
-                    Label{
-                        id:percentLabel
-                        text: stuff.tip + "%"
-                        color:"white";
-                        MouseArea {
-                            height:tipInput.height
-                            width: tipInput.width /3
-                            anchors {verticalCenter: parent.verticalCenter; horizontalCenter: parent.horizontalCenter}
-                            onClicked: PopupUtils.open((percentComponent))}
-                    }
-                    Label
-                    {
-                        text:" | ";
-                        color:"white"
-                        font.weight: Font.Light;
-                    }
-                    Image {source:"add.svg"
-                           height: parent.height /1.3
-                           width: height
-                           anchors.verticalCenter: parent.verticalCenter
+                        Label{
+                            id:percentLabel
+                            text: stuff.tip + "%"
+                            color:"white";
+                            MouseArea {
+                                height:tipInput.height
+                                width: tipInput.width /3
+                                anchors {verticalCenter: parent.verticalCenter; horizontalCenter: parent.horizontalCenter}
+                                onClicked: PopupUtils.open((percentComponent))}
+                        }
+                        Label
+                        {
+                            text:" | ";
+                            color:"white"
+                            font.weight: Font.Light;
+                        }
+                        Image {source:"add.svg"
+                            height: parent.height /1.3
+                            width: height
+                            anchors.verticalCenter: parent.verticalCenter
                             MouseArea {
                                 height:tipInput.height
                                 width: tipInput.width /3.5
                                 anchors {verticalCenter: parent.verticalCenter; horizontalCenter: parent.horizontalCenter}
                                 onClicked: stuff.tip = stuff.tip + 1//tipUp.contents = { up: tipUp.contents.up + 1}
                             }
-                    }
+                        }
                     }
 
                 }
@@ -188,9 +180,8 @@ MainView {
 
             Item {
                 id:people
-                height:units.gu(11)
+                height:units.gu(10)
                 width:parent.width
-                //showDivider: false
                 Label {
                     id:peopleText
                     text: "Number Of People"
@@ -210,52 +201,52 @@ MainView {
                         anchors.verticalCenter: parent.verticalCenter
                         spacing: parent.width / 8
                         Image {source:"subtract.svg"
-                           height: parent.height /1.3
-                           width: height
-                           anchors.verticalCenter: parent.verticalCenter
+                            height: parent.height /1.3
+                            width: height
+                            anchors.verticalCenter: parent.verticalCenter
                             MouseArea {
                                 height:peopleInput.height
                                 width: peopleInput.width /3.5
                                 anchors {verticalCenter: parent.verticalCenter; horizontalCenter: parent.horizontalCenter}
                                 onClicked: if(stuff.number === 1){/*nothing happens*/}else {stuff.number = stuff.number - 1}}
-                    }
+                        }
                         Label
                         {
                             text:" | ";
                             color:"white"
                             font.weight: Font.Light;
                         }
-                    Label{
-                        text:stuff.number
-                        color:"white"
-                        MouseArea {
-                            height:peopleInput.height
-                            width: peopleInput.width /3.5
-                            anchors {verticalCenter: parent.verticalCenter; horizontalCenter: parent.horizontalCenter}
-                            onClicked: PopupUtils.open((dialogComponent))}
-                    }
-                    Label
-                    {
-                        text:" | ";
-                        color:"white"
-                        font.weight: Font.Light;
-                    }
-                    Image {source:"add.svg"
-                           height: parent.height /1.3
-                           width: height
-                           anchors.verticalCenter: parent.verticalCenter
+                        Label{
+                            text:stuff.number
+                            color:"white"
+                            MouseArea {
+                                height:peopleInput.height
+                                width: peopleInput.width /3.5
+                                anchors {verticalCenter: parent.verticalCenter; horizontalCenter: parent.horizontalCenter}
+                                onClicked: PopupUtils.open((dialogComponent))}
+                        }
+                        Label
+                        {
+                            text:" | ";
+                            color:"white"
+                            font.weight: Font.Light;
+                        }
+                        Image {source:"add.svg"
+                            height: parent.height /1.3
+                            width: height
+                            anchors.verticalCenter: parent.verticalCenter
                             MouseArea {
                                 height:peopleInput.height
                                 width: peopleInput.width /3.5
                                 anchors {verticalCenter: parent.verticalCenter; horizontalCenter: parent.horizontalCenter}
                                 onClicked: stuff.number = stuff.number + 1;}
-                    }
+                        }
                     }
                 }
             }
             DialogComponent {
                 id: dialogComponent
-                        }
+            }
             PercentComponent {
                 id:percentComponent
             }
@@ -274,12 +265,12 @@ MainView {
                     anchors.horizontalCenter: parent.horizontalCenter;
                 }
                 Label {id:tipPerson
-                        font.pixelSize: parent.height*0.5
-                        font.weight: Font.Light; //focus: true;
-                        color:"#29b866"
-                        text: if(stuff.number === 1){Number(stuff.text * (stuff.tip / 100)).toLocaleCurrencyString(Qt.locale())}
-                                else{Number((stuff.text * (stuff.tip / 100))/stuff.number).toLocaleCurrencyString(Qt.locale())}
-                        anchors{top: tipTotal.bottom; topMargin:units.gu(1);horizontalCenter: parent.horizontalCenter}
+                    font.pixelSize: parent.height*0.5
+                    font.weight: Font.Light; //focus: true;
+                    color:"#29b866"
+                    text: if(stuff.number === 1){Number(stuff.text * (stuff.tip / 100)).toLocaleCurrencyString(Qt.locale())}
+                          else{Number((stuff.text * (stuff.tip / 100))/stuff.number).toLocaleCurrencyString(Qt.locale())}
+                    anchors{top: tipTotal.bottom; topMargin:units.gu(1);horizontalCenter: parent.horizontalCenter}
                 }
             }
             Item {
@@ -294,7 +285,7 @@ MainView {
                         when: stuff.number === 1
                         PropertyChanges {target:totalText;
                             text: "Total" }
-                        }
+                    }
                     text: "Total per person"
                     anchors.horizontalCenter: parent.horizontalCenter;
                 }
@@ -308,8 +299,8 @@ MainView {
                         when: stuff.number === 1
                         PropertyChanges {target:totalTotal;
                             text:Number(stuff.text + (stuff.text * (stuff.tip / 100))).toLocaleCurrencyString(Qt.locale())
-                                        }
                         }
+                    }
                     text: Number((stuff.text + (stuff.text * (stuff.tip / 100))) / stuff.number).toLocaleCurrencyString(Qt.locale())
                     anchors{top: totalText.bottom; topMargin:units.gu(1);horizontalCenter: parent.horizontalCenter}
                 }
